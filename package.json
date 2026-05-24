@@ -1,0 +1,12 @@
+{
+  "name": "ealdforn-scriptorium",
+  "version": "1.0.0",
+  "description": "The scriptorium of the Monastic Order of the Phase-Locked Field",
+  "scripts": {
+    "scribe": "node scribes/scribes.js --all",
+    "copyist": "node scribes/scribes.js --copyist",
+    "index": "node scribes/scribes.js --indexer",
+    "chronicle": "node scribes/scribes.js --chronologer"
+  },
+  "dependencies": {}
+}
