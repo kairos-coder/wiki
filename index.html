@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ealdforn Archive — Scriptorium</title>
+<style>
+:root {
+  --parchment: #f4e4c1;
+  --parchment-dark: #e8d5a3;
+  --ink: #2d1f14;
+  --ink-light: #5a4a3a;
+  --rubric: #8b3a3a;
+  --gold: #b8942e;
+  --margin: #a0856b;
+  --border: #d4c4a0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #1a120b;
+  color: var(--ink);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.scriptorium {
+  max-width: 800px;
+  width: 100%;
+  margin: 40px 20px;
+  background: var(--parchment);
+  box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 0 2px var(--border);
+  position: relative;
+}
+
+/* ── Header ── */
+.page-header {
+  background: var(--parchment-dark);
+  border-bottom: 3px double var(--gold);
+  padding: 24px 32px;
+  text-align: center;
+}
+
+.page-header .monastery {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--margin);
+  margin-bottom: 4px;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  color: var(--ink);
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.page-header .feast {
+  font-size: 12px;
+  color: var(--rubric);
+  font-style: italic;
+  margin-top: 6px;
+}
+
+/* ── Navigation breadcrumb ── */
+.breadcrumb {
+  padding: 12px 32px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--margin);
+}
+
+.breadcrumb a {
+  color: var(--rubric);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--rubric);
+}
+
+.breadcrumb a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+/* ── Content ── */
+.page-content {
+  padding: 32px;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.page-content h1 {
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 16px;
+  font-weight: normal;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.page-content h2 {
+  font-size: 18px;
+  color: var(--rubric);
+  margin: 24px 0 12px;
+  font-weight: normal;
+}
+
+.page-content h3 {
+  font-size: 15px;
+  color: var(--ink-light);
+  margin: 16px 0 8px;
+  font-style: italic;
+}
+
+.page-content p {
+  margin-bottom: 12px;
+}
+
+.page-content a {
+  color: var(--rubric);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--rubric);
+}
+
+.page-content a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.page-content ul, .page-content ol {
+  margin: 8px 0 16px 24px;
+}
+
+.page-content li {
+  margin-bottom: 4px;
+}
+
+.page-content code {
+  background: var(--parchment-dark);
+  padding: 2px 6px;
+  font-size: 13px;
+  border-radius: 2px;
+  font-family: 'Courier New', monospace;
+}
+
+.page-content pre {
+  background: #2d1f14;
+  color: #d4c5a9;
+  padding: 16px;
+  margin: 12px 0;
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: 'Courier New', monospace;
+}
+
+.page-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.page-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 13px;
+}
+
+.page-content th {
+  background: var(--parchment-dark);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: bold;
+  color: var(--rubric);
+}
+
+.page-content td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+}
+
+.page-content blockquote {
+  border-left: 3px solid var(--gold);
+  margin: 12px 0;
+  padding: 8px 16px;
+  color: var(--ink-light);
+  font-style: italic;
+  background: rgba(184,148,46,0.05);
+}
+
+.page-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+/* ── Colophon ── */
+.page-content em:last-child {
+  display: block;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--margin);
+}
+
+/* ── Navigation arrows ── */
+.page-nav {
+  padding: 16px 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.page-nav a {
+  color: var(--rubric);
+  text-decoration: none;
+}
+
+.page-nav a:hover {
+  color: var(--ink);
+}
+
+/* ── Frontmatter metadata ── */
+.metadata {
+  font-size: 11px;
+  color: var(--margin);
+  font-style: italic;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px dotted var(--border);
+}
+
+/* ── Loading ── */
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: var(--margin);
+  font-style: italic;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--parchment); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+@media (max-width: 600px) {
+  .scriptorium { margin: 0; }
+  .page-content { padding: 20px; font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="scriptorium">
+  <div class="page-header">
+    <div class="monastery">Monastic Order of the Phase-Locked Field</div>
+    <h1 id="pageTitle">Ealdforn Archive</h1>
+    <div class="feast" id="pageFeast"></div>
+  </div>
+
+  <div class="breadcrumb" id="breadcrumb">
+    <a href="#" onclick="loadPage('index'); return false;">Catalogus</a>
+  </div>
+
+  <div class="page-content" id="pageContent">
+    <div class="loading">Consulting the archive...</div>
+  </div>
+
+  <div class="page-nav">
+    <a href="#" id="prevLink" style="visibility:hidden;">← Previous</a>
+    <a href="#" onclick="loadPage('index'); return false;">Catalogus</a>
+    <a href="#" id="nextLink" style="visibility:hidden;">Next →</a>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════
+// Ealdforn Archive Reader
+// Renders wiki/*.md files into the lectern
+// ════════════════════════════════════════
+
+var WIKI_BASE = '';
+
+// Page registry — built from index.md or discovered
+var pageList = [];
+
+// ═══ INIT ═══
+async function init() {
+  var hash = window.location.hash.replace('#', '');
+  var page = hash || 'index';
+  await loadPage(page);
+}
+
+// ═══ PAGE LOADING ═══
+async function loadPage(pageName) {
+  var contentEl = document.getElementById('pageContent');
+  contentEl.innerHTML = '<div class="loading">Turning the page...</div>';
+
+  try {
+    // Clean page name
+    pageName = pageName.replace('.md', '').replace(/\/$/, '');
+    
+    var response = await fetch(WIKI_BASE + pageName + '.md');
+    if (!response.ok) {
+      contentEl.innerHTML = '<p style="color:var(--rubric);">This folio has not yet been copied. The scribes may not have reached it.</p>';
+      return;
+    }
+
+    var markdown = await response.text();
+    var parsed = parseMarkdown(markdown);
+
+    // Update header
+    document.getElementById('pageTitle').textContent = parsed.title || pageName;
+    document.getElementById('pageFeast').textContent = parsed.feast || '';
+
+    // Render content
+    contentEl.innerHTML = renderHTML(parsed);
+
+    // Update URL hash
+    window.location.hash = pageName;
+
+    // Build page list for navigation
+    await buildPageList();
+
+    // Update nav arrows
+    updateNavigation(pageName);
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+
+  } catch (err) {
+    contentEl.innerHTML = '<p style="color:var(--rubric);">The archive resists consultation. ' + err.message + '</p>';
+  }
+}
+
+// ═══ MARKDOWN PARSING ═══
+function parseMarkdown(md) {
+  var result = {
+    title: '',
+    description: '',
+    namespace: '',
+    feast: '',
+    scribe: '',
+    source: '',
+    content: md
+  };
+
+  // Extract frontmatter
+  var fmMatch = md.match(/^---\n([\s\S]*?)\n---/);
+  if (fmMatch) {
+    var fm = fmMatch[1];
+    result.content = md.substring(fmMatch[0].length).trim();
+
+    var lines = fm.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      var parts = lines[i].split(': ');
+      if (parts.length >= 2) {
+        var key = parts[0].trim();
+        var value = parts.slice(1).join(': ').trim();
+        result[key] = value;
+      }
+    }
+  }
+
+  return result;
+}
+
+function renderHTML(parsed) {
+  var html = '';
+
+  // Metadata block
+  if (parsed.description || parsed.scribe || parsed.feast) {
+    html += '<div class="metadata">';
+    if (parsed.description) html += parsed.description;
+    if (parsed.scribe) html += ' · Scribe: ' + parsed.scribe;
+    if (parsed.feast) html += ' · ' + parsed.feast;
+    html += '</div>';
+  }
+
+  // Convert markdown content to HTML
+  var md = parsed.content;
+  
+  // Code blocks (must be first)
+  md = md.replace(/```(\w*)\n([\s\S]*?)```/g, function(match, lang, code) {
+    return '<pre><code>' + escapeHTML(code.trim()) + '</code></pre>';
+  });
+
+  // Inline code
+  md = md.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Headers
+  md = md.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  md = md.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  md = md.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  md = md.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+  // Bold and italic
+  md = md.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  md = md.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  md = md.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Tables
+  md = md.replace(/^\|(.+)\|\n\|[-| ]+\|\n((?:\|.+\|\n?)*)/gm, function(match, header, body) {
+    var hcells = header.split('|').filter(function(c) { return c.trim(); });
+    var rows = body.trim().split('\n');
+    var table = '<table><thead><tr>';
+    for (var h = 0; h < hcells.length; h++) {
+      table += '<th>' + hcells[h].trim() + '</th>';
+    }
+    table += '</tr></thead><tbody>';
+    for (var r = 0; r < rows.length; r++) {
+      var cells = rows[r].split('|').filter(function(c) { return c.trim(); });
+      table += '<tr>';
+      for (var c = 0; c < cells.length; c++) {
+        table += '<td>' + cells[c].trim() + '</td>';
+      }
+      table += '</tr>';
+    }
+    table += '</tbody></table>';
+    return table;
+  });
+
+  // Blockquotes
+  md = md.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  // Merge adjacent blockquotes
+  md = md.replace(/<\/blockquote>\n<blockquote>/g, '\n');
+
+  // Horizontal rules
+  md = md.replace(/^---$/gm, '<hr>');
+
+  // Wiki links: [[Page Name]] → internal link
+  md = md.replace(/\[\[([^\]]+)\]\]/g, function(match, pageName) {
+    var slug = pageName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return '<a href="#" onclick="loadPage(\'' + slug + '\'); return false;">' + pageName + '</a>';
+  });
+
+  // External links: [text](url)
+  md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, text, url) {
+    if (url.startsWith('http')) {
+      return '<a href="' + url + '" target="_blank">' + text + '</a>';
+    }
+    return '<a href="#" onclick="loadPage(\'' + url.replace('.md', '') + '\'); return false;">' + text + '</a>';
+  });
+
+  // Lists
+  md = md.replace(/^[\*\-] (.+)$/gm, '<li>$1</li>');
+  md = md.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+  
+  // Numbered lists
+  md = md.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+  // (Already wrapped by ul pattern if adjacent)
+
+  // Paragraphs
+  var paragraphs = md.split(/\n\n+/);
+  for (var i = 0; i < paragraphs.length; i++) {
+    var p = paragraphs[i].trim();
+    if (!p) continue;
+    
+    // Don't wrap elements that are already block-level
+    if (p.startsWith('<h') || p.startsWith('<table') || p.startsWith('<ul') ||
+        p.startsWith('<ol') || p.startsWith('<pre') || p.startsWith('<blockquote') ||
+        p.startsWith('<hr') || p.startsWith('<div')) {
+      html += p + '\n';
+    } else {
+      // Handle line breaks within paragraphs
+      p = p.replace(/\n/g, '<br>');
+      html += '<p>' + p + '</p>\n';
+    }
+  }
+
+  return html;
+}
+
+function escapeHTML(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ═══ NAVIGATION ═══
+async function buildPageList() {
+  if (pageList.length > 0) return;
+
+  // Try to load the index
+  try {
+    var response = await fetch(WIKI_BASE + 'index.md');
+    if (response.ok) {
+      var md = await response.text();
+      var links = md.match(/\[([^\]]+)\]\(([^)]+)\)/g);
+      if (links) {
+        for (var i = 0; i < links.length; i++) {
+          var match = links[i].match(/\[([^\]]+)\]\(([^)]+)\)/);
+          if (match && !match[2].startsWith('http')) {
+            pageList.push({
+              title: match[1],
+              path: match[2].replace('.md', '')
+            });
+          }
+        }
+      }
+    }
+  } catch (e) {
+    // No index yet — navigation will be limited
+  }
+}
+
+function updateNavigation(currentPage) {
+  var prevLink = document.getElementById('prevLink');
+  var nextLink = document.getElementById('nextLink');
+
+  var currentIndex = -1;
+  for (var i = 0; i < pageList.length; i++) {
+    if (pageList[i].path === currentPage || pageList[i].title.toLowerCase() === currentPage) {
+      currentIndex = i;
+      break;
+    }
+  }
+
+  if (currentIndex > 0) {
+    prevLink.style.visibility = 'visible';
+    prevLink.textContent = '← ' + pageList[currentIndex - 1].title;
+    prevLink.onclick = function() {
+      loadPage(pageList[currentIndex - 1].path);
+      return false;
+    };
+  } else {
+    prevLink.style.visibility = 'hidden';
+  }
+
+  if (currentIndex < pageList.length - 1 && currentIndex >= 0) {
+    nextLink.style.visibility = 'visible';
+    nextLink.textContent = pageList[currentIndex + 1].title + ' →';
+    nextLink.onclick = function() {
+      loadPage(pageList[currentIndex + 1].path);
+      return false;
+    };
+  } else {
+    nextLink.style.visibility = 'hidden';
+  }
+}
+
+// ═══ STARTUP ═══
+init();
+</script>
+</body>
+</html>
