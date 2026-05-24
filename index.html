@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ealdforn Archive — Scriptorium</title>
+<title>Scriptorium — The Order of Olympus</title>
 <style>
 :root {
   --parchment: #f4e4c1;
@@ -14,6 +14,10 @@
   --gold: #b8942e;
   --margin: #a0856b;
   --border: #d4c4a0;
+  --terminal-bg: #1a120b;
+  --terminal-text: #c9a23b;
+  --terminal-dim: #6b5a3a;
+  --terminal-green: #7eb8a0;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,25 +35,34 @@ body {
   max-width: 800px;
   width: 100%;
   margin: 40px 20px;
-  background: var(--parchment);
-  box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 0 2px var(--border);
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-/* ── Header ── */
+/* ── HEADER ── */
 .page-header {
-  background: var(--parchment-dark);
+  background: var(--parchment);
   border-bottom: 3px double var(--gold);
   padding: 24px 32px;
   text-align: center;
+  box-shadow: 0 0 60px rgba(0,0,0,0.5);
 }
 
-.page-header .monastery {
-  font-size: 11px;
+.page-header .studio {
+  font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--margin);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+}
+
+.page-header .order {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rubric);
+  margin-bottom: 6px;
 }
 
 .page-header h1 {
@@ -59,438 +72,340 @@ body {
   letter-spacing: 1px;
 }
 
-.page-header .feast {
-  font-size: 12px;
-  color: var(--rubric);
-  font-style: italic;
-  margin-top: 6px;
-}
-
-/* ── Navigation breadcrumb ── */
-.breadcrumb {
-  padding: 12px 32px;
-  font-size: 12px;
-  border-bottom: 1px solid var(--border);
-  color: var(--margin);
-}
-
-.breadcrumb a {
-  color: var(--rubric);
-  text-decoration: none;
-  border-bottom: 1px dotted var(--rubric);
-}
-
-.breadcrumb a:hover {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-}
-
-/* ── Content ── */
-.page-content {
-  padding: 32px;
-  line-height: 1.8;
-  font-size: 15px;
-}
-
-.page-content h1 {
-  font-size: 22px;
-  color: var(--ink);
-  margin-bottom: 16px;
-  font-weight: normal;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 8px;
-}
-
-.page-content h2 {
-  font-size: 18px;
-  color: var(--rubric);
-  margin: 24px 0 12px;
-  font-weight: normal;
-}
-
-.page-content h3 {
-  font-size: 15px;
-  color: var(--ink-light);
-  margin: 16px 0 8px;
-  font-style: italic;
-}
-
-.page-content p {
-  margin-bottom: 12px;
-}
-
-.page-content a {
-  color: var(--rubric);
-  text-decoration: none;
-  border-bottom: 1px dotted var(--rubric);
-}
-
-.page-content a:hover {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-}
-
-.page-content ul, .page-content ol {
-  margin: 8px 0 16px 24px;
-}
-
-.page-content li {
-  margin-bottom: 4px;
-}
-
-.page-content code {
-  background: var(--parchment-dark);
-  padding: 2px 6px;
-  font-size: 13px;
-  border-radius: 2px;
-  font-family: 'Courier New', monospace;
-}
-
-.page-content pre {
-  background: #2d1f14;
-  color: #d4c5a9;
-  padding: 16px;
-  margin: 12px 0;
-  overflow-x: auto;
-  font-size: 12px;
-  line-height: 1.5;
-  font-family: 'Courier New', monospace;
-}
-
-.page-content pre code {
-  background: none;
-  padding: 0;
-  color: inherit;
-}
-
-.page-content table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 16px 0;
-  font-size: 13px;
-}
-
-.page-content th {
-  background: var(--parchment-dark);
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-  text-align: left;
-  font-weight: bold;
-  color: var(--rubric);
-}
-
-.page-content td {
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-}
-
-.page-content blockquote {
-  border-left: 3px solid var(--gold);
-  margin: 12px 0;
-  padding: 8px 16px;
-  color: var(--ink-light);
-  font-style: italic;
-  background: rgba(184,148,46,0.05);
-}
-
-.page-content hr {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 24px 0;
-}
-
-/* ── Colophon ── */
-.page-content em:last-child {
-  display: block;
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  font-size: 12px;
-  color: var(--margin);
-}
-
-/* ── Navigation arrows ── */
-.page-nav {
-  padding: 16px 32px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-}
-
-.page-nav a {
-  color: var(--rubric);
-  text-decoration: none;
-}
-
-.page-nav a:hover {
-  color: var(--ink);
-}
-
-/* ── Frontmatter metadata ── */
-.metadata {
+.page-header .tenders {
   font-size: 11px;
   color: var(--margin);
   font-style: italic;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px dotted var(--border);
+  margin-top: 4px;
 }
 
-/* ── Loading ── */
-.loading {
-  text-align: center;
-  padding: 60px;
+/* ── ARCHIVE PANE ── */
+.archive-pane {
+  background: var(--parchment);
+  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  flex: 1;
+  min-height: 300px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.archive-pane .breadcrumb {
+  padding: 10px 24px;
+  font-size: 11px;
+  border-bottom: 1px solid var(--border);
   color: var(--margin);
-  font-style: italic;
+  background: var(--parchment-dark);
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--parchment); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.archive-pane .breadcrumb a {
+  color: var(--rubric);
+  text-decoration: none;
+}
+
+.archive-pane .breadcrumb a:hover { color: var(--ink); }
+
+.archive-pane .page-content {
+  padding: 24px;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.archive-pane .page-content h1 { font-size: 20px; margin-bottom: 12px; font-weight: normal; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+.archive-pane .page-content h2 { font-size: 16px; color: var(--rubric); margin: 18px 0 8px; font-weight: normal; }
+.archive-pane .page-content h3 { font-size: 14px; color: var(--ink-light); margin: 12px 0 6px; font-style: italic; }
+.archive-pane .page-content p { margin-bottom: 10px; }
+.archive-pane .page-content a { color: var(--rubric); text-decoration: none; border-bottom: 1px dotted var(--rubric); }
+.archive-pane .page-content a:hover { color: var(--ink); }
+.archive-pane .page-content ul, .archive-pane .page-content ol { margin: 6px 0 12px 20px; }
+.archive-pane .page-content li { margin-bottom: 3px; }
+.archive-pane .page-content code { background: var(--parchment-dark); padding: 1px 5px; font-size: 12px; font-family: 'Courier New', monospace; }
+.archive-pane .page-content pre { background: #2d1f14; color: #d4c5a9; padding: 12px; margin: 10px 0; overflow-x: auto; font-size: 11px; line-height: 1.4; font-family: 'Courier New', monospace; }
+.archive-pane .page-content pre code { background: none; padding: 0; color: inherit; }
+.archive-pane .page-content table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 12px; }
+.archive-pane .page-content th { background: var(--parchment-dark); border: 1px solid var(--border); padding: 6px 10px; text-align: left; color: var(--rubric); }
+.archive-pane .page-content td { border: 1px solid var(--border); padding: 6px 10px; }
+.archive-pane .page-content blockquote { border-left: 3px solid var(--gold); margin: 10px 0; padding: 6px 14px; color: var(--ink-light); font-style: italic; }
+.archive-pane .page-content hr { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+
+.archive-pane .metadata {
+  font-size: 10px; color: var(--margin); font-style: italic;
+  margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px dotted var(--border);
+}
+
+.archive-pane .loading {
+  text-align: center; padding: 40px; color: var(--margin); font-style: italic;
+}
+
+/* ── TERMINAL ── */
+.terminal {
+  background: var(--terminal-bg);
+  border: 1px solid #2a1f14;
+  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  font-family: 'Courier New', monospace;
+}
+
+.terminal-output {
+  padding: 14px 18px;
+  min-height: 100px;
+  max-height: 25vh;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--terminal-dim);
+}
+
+.terminal-output .line { margin-bottom: 2px; }
+.terminal-output .cmd { color: var(--gold); }
+.terminal-output .result { color: var(--terminal-green); }
+.terminal-output .warn { color: #c9a23b; }
+.terminal-output .error { color: #c06060; }
+.terminal-output .scribe-name { color: #7eb8a0; font-weight: bold; }
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-top: 1px solid #2a1f14;
+  background: #0d0a06;
+}
+
+.terminal-prompt {
+  color: var(--rubric);
+  margin-right: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.terminal-input-line input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--terminal-text);
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  outline: none;
+  caret-color: var(--gold);
+}
+
+.terminal-input-line input::placeholder {
+  color: #3a2f1f;
+}
+
+/* ── SCROLLBAR ── */
+.archive-pane::-webkit-scrollbar,
+.terminal-output::-webkit-scrollbar { width: 5px; }
+.archive-pane::-webkit-scrollbar-track { background: var(--parchment); }
+.archive-pane::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.terminal-output::-webkit-scrollbar-track { background: var(--terminal-bg); }
+.terminal-output::-webkit-scrollbar-thumb { background: #2a1f14; border-radius: 2px; }
 
 @media (max-width: 600px) {
   .scriptorium { margin: 0; }
-  .page-content { padding: 20px; font-size: 14px; }
+  .archive-pane .page-content { padding: 16px; font-size: 13px; }
+  .archive-pane { max-height: 40vh; }
+  .terminal-output { max-height: 20vh; }
 }
 </style>
 </head>
 <body>
 
 <div class="scriptorium">
+
+  <!-- HEADER -->
   <div class="page-header">
-    <div class="monastery">Monastic Order of the Phase-Locked Field</div>
-    <h1 id="pageTitle">Ealdforn Archive</h1>
-    <div class="feast" id="pageFeast"></div>
+    <div class="studio">Ealdforn Studios presents</div>
+    <div class="order">The Order of Olympus</div>
+    <h1>Scriptorium</h1>
+    <div class="tenders">Tended by the word-keepers &amp; wyrd-waerds</div>
   </div>
 
-  <div class="breadcrumb" id="breadcrumb">
-    <a href="#" onclick="loadPage('index'); return false;">Catalogus</a>
+  <!-- ARCHIVE PANE -->
+  <div class="archive-pane" id="archivePane">
+    <div class="breadcrumb" id="breadcrumb">
+      <a href="#" onclick="loadFolio('index'); return false;">Catalogus</a>
+    </div>
+    <div class="page-content" id="pageContent">
+      <div class="loading">Consulting the archive...</div>
+    </div>
   </div>
 
-  <div class="page-content" id="pageContent">
-    <div class="loading">Consulting the archive...</div>
+  <!-- TERMINAL -->
+  <div class="terminal">
+    <div class="terminal-output" id="terminalOutput">
+      <div class="line result">✦ The scriptorium is still. The quills wait.</div>
+      <div class="line">Type <span class="cmd">help</span> to see what the scribes can do.</div>
+    </div>
+    <div class="terminal-input-line">
+      <span class="terminal-prompt">scriptorium&gt;</span>
+      <input type="text" id="terminalInput" placeholder="speak to the scribes..." autofocus>
+    </div>
   </div>
 
-  <div class="page-nav">
-    <a href="#" id="prevLink" style="visibility:hidden;">← Previous</a>
-    <a href="#" onclick="loadPage('index'); return false;">Catalogus</a>
-    <a href="#" id="nextLink" style="visibility:hidden;">Next →</a>
-  </div>
 </div>
 
 <script>
 // ════════════════════════════════════════
-// Ealdforn Archive Reader
-// Renders wiki/*.md files into the lectern
+// SCRIPTORIUM — The Order of Olympus
+// Archive lectern + Scribe terminal
 // ════════════════════════════════════════
 
+// ── STATE ──
 var WIKI_BASE = '';
-
-// Page registry — built from index.md or discovered
 var pageList = [];
+var terminalHistory = [];
+var historyIndex = -1;
 
 // ═══ INIT ═══
-async function init() {
+function init() {
   var hash = window.location.hash.replace('#', '');
-  var page = hash || 'index';
-  await loadPage(page);
+  loadFolio(hash || 'index');
+  
+  var input = document.getElementById('terminalInput');
+  input.addEventListener('keydown', handleTerminalKey);
+  input.focus();
+  
+  // Click archive to focus terminal
+  document.getElementById('archivePane').addEventListener('click', function() {
+    input.focus();
+  });
 }
 
-// ═══ PAGE LOADING ═══
-async function loadPage(pageName) {
+// ═══ FOLIO LOADING (Archive Pane) ═══
+async function loadFolio(folioName) {
   var contentEl = document.getElementById('pageContent');
   contentEl.innerHTML = '<div class="loading">Turning the page...</div>';
-
+  
+  folioName = folioName.replace('.md', '').replace(/\/$/, '');
+  
   try {
-    // Clean page name
-    pageName = pageName.replace('.md', '').replace(/\/$/, '');
-    
-    var response = await fetch(WIKI_BASE + pageName + '.md');
+    var response = await fetch(WIKI_BASE + folioName + '.md');
     if (!response.ok) {
       contentEl.innerHTML = '<p style="color:var(--rubric);">This folio has not yet been copied. The scribes may not have reached it.</p>';
       return;
     }
-
+    
     var markdown = await response.text();
-    var parsed = parseMarkdown(markdown);
-
-    // Update header
-    document.getElementById('pageTitle').textContent = parsed.title || pageName;
-    document.getElementById('pageFeast').textContent = parsed.feast || '';
-
-    // Render content
-    contentEl.innerHTML = renderHTML(parsed);
-
-    // Update URL hash
-    window.location.hash = pageName;
-
-    // Build page list for navigation
+    var parsed = parseFrontmatter(markdown);
+    contentEl.innerHTML = renderMarkdown(parsed);
+    window.location.hash = folioName;
     await buildPageList();
-
-    // Update nav arrows
-    updateNavigation(pageName);
-
-    // Scroll to top
-    window.scrollTo(0, 0);
-
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
   } catch (err) {
-    contentEl.innerHTML = '<p style="color:var(--rubric);">The archive resists consultation. ' + err.message + '</p>';
+    contentEl.innerHTML = '<p style="color:var(--rubric);">The archive resists. ' + err.message + '</p>';
   }
 }
 
-// ═══ MARKDOWN PARSING ═══
-function parseMarkdown(md) {
-  var result = {
-    title: '',
-    description: '',
-    namespace: '',
-    feast: '',
-    scribe: '',
-    source: '',
-    content: md
-  };
-
-  // Extract frontmatter
+function parseFrontmatter(md) {
+  var result = { title: '', description: '', feast: '', scribe: '', source: '', content: md };
   var fmMatch = md.match(/^---\n([\s\S]*?)\n---/);
   if (fmMatch) {
-    var fm = fmMatch[1];
     result.content = md.substring(fmMatch[0].length).trim();
-
-    var lines = fm.split('\n');
+    var lines = fmMatch[1].split('\n');
     for (var i = 0; i < lines.length; i++) {
       var parts = lines[i].split(': ');
-      if (parts.length >= 2) {
-        var key = parts[0].trim();
-        var value = parts.slice(1).join(': ').trim();
-        result[key] = value;
-      }
+      if (parts.length >= 2) result[parts[0].trim()] = parts.slice(1).join(': ').trim();
     }
   }
-
   return result;
 }
 
-function renderHTML(parsed) {
+function renderMarkdown(parsed) {
   var html = '';
-
-  // Metadata block
-  if (parsed.description || parsed.scribe || parsed.feast) {
+  
+  if (parsed.description || parsed.scribe) {
     html += '<div class="metadata">';
     if (parsed.description) html += parsed.description;
-    if (parsed.scribe) html += ' · Scribe: ' + parsed.scribe;
+    if (parsed.scribe) html += ' · ' + parsed.scribe;
     if (parsed.feast) html += ' · ' + parsed.feast;
     html += '</div>';
   }
-
-  // Convert markdown content to HTML
+  
   var md = parsed.content;
   
-  // Code blocks (must be first)
-  md = md.replace(/```(\w*)\n([\s\S]*?)```/g, function(match, lang, code) {
+  // Code blocks
+  md = md.replace(/```(\w*)\n([\s\S]*?)```/g, function(_, lang, code) {
     return '<pre><code>' + escapeHTML(code.trim()) + '</code></pre>';
   });
-
+  
   // Inline code
   md = md.replace(/`([^`]+)`/g, '<code>$1</code>');
-
+  
   // Headers
   md = md.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
   md = md.replace(/^### (.+)$/gm, '<h3>$1</h3>');
   md = md.replace(/^## (.+)$/gm, '<h2>$1</h2>');
   md = md.replace(/^# (.+)$/gm, '<h1>$1</h1>');
-
-  // Bold and italic
+  
+  // Bold/italic
   md = md.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
   md = md.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   md = md.replace(/\*(.+?)\*/g, '<em>$1</em>');
-
+  
   // Tables
-  md = md.replace(/^\|(.+)\|\n\|[-| ]+\|\n((?:\|.+\|\n?)*)/gm, function(match, header, body) {
+  md = md.replace(/^\|(.+)\|\n\|[-| ]+\|\n((?:\|.+\|\n?)*)/gm, function(_, header, body) {
     var hcells = header.split('|').filter(function(c) { return c.trim(); });
     var rows = body.trim().split('\n');
     var table = '<table><thead><tr>';
-    for (var h = 0; h < hcells.length; h++) {
-      table += '<th>' + hcells[h].trim() + '</th>';
-    }
+    for (var h = 0; h < hcells.length; h++) table += '<th>' + hcells[h].trim() + '</th>';
     table += '</tr></thead><tbody>';
     for (var r = 0; r < rows.length; r++) {
       var cells = rows[r].split('|').filter(function(c) { return c.trim(); });
       table += '<tr>';
-      for (var c = 0; c < cells.length; c++) {
-        table += '<td>' + cells[c].trim() + '</td>';
-      }
+      for (var c = 0; c < cells.length; c++) table += '<td>' + cells[c].trim() + '</td>';
       table += '</tr>';
     }
-    table += '</tbody></table>';
-    return table;
+    return table + '</tbody></table>';
   });
-
+  
   // Blockquotes
   md = md.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
-  // Merge adjacent blockquotes
   md = md.replace(/<\/blockquote>\n<blockquote>/g, '\n');
-
-  // Horizontal rules
+  
+  // HR
   md = md.replace(/^---$/gm, '<hr>');
-
-  // Wiki links: [[Page Name]] → internal link
-  md = md.replace(/\[\[([^\]]+)\]\]/g, function(match, pageName) {
-    var slug = pageName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    return '<a href="#" onclick="loadPage(\'' + slug + '\'); return false;">' + pageName + '</a>';
+  
+  // Wiki links [[Page]]
+  md = md.replace(/\[\[([^\]]+)\]\]/g, function(_, name) {
+    var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return '<a href="#" onclick="loadFolio(\'' + slug + '\'); return false;">' + name + '</a>';
   });
-
-  // External links: [text](url)
-  md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, text, url) {
-    if (url.startsWith('http')) {
-      return '<a href="' + url + '" target="_blank">' + text + '</a>';
-    }
-    return '<a href="#" onclick="loadPage(\'' + url.replace('.md', '') + '\'); return false;">' + text + '</a>';
+  
+  // Markdown links [text](url)
+  md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_, text, url) {
+    if (url.startsWith('http')) return '<a href="' + url + '" target="_blank">' + text + '</a>';
+    return '<a href="#" onclick="loadFolio(\'' + url.replace('.md', '') + '\'); return false;">' + text + '</a>';
   });
-
+  
   // Lists
   md = md.replace(/^[\*\-] (.+)$/gm, '<li>$1</li>');
   md = md.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
-  
-  // Numbered lists
   md = md.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
-  // (Already wrapped by ul pattern if adjacent)
-
+  
   // Paragraphs
   var paragraphs = md.split(/\n\n+/);
   for (var i = 0; i < paragraphs.length; i++) {
     var p = paragraphs[i].trim();
     if (!p) continue;
-    
-    // Don't wrap elements that are already block-level
     if (p.startsWith('<h') || p.startsWith('<table') || p.startsWith('<ul') ||
-        p.startsWith('<ol') || p.startsWith('<pre') || p.startsWith('<blockquote') ||
-        p.startsWith('<hr') || p.startsWith('<div')) {
+        p.startsWith('<pre') || p.startsWith('<blockquote') || p.startsWith('<hr')) {
       html += p + '\n';
     } else {
-      // Handle line breaks within paragraphs
       p = p.replace(/\n/g, '<br>');
       html += '<p>' + p + '</p>\n';
     }
   }
-
+  
   return html;
 }
 
 function escapeHTML(text) {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// ═══ NAVIGATION ═══
 async function buildPageList() {
   if (pageList.length > 0) return;
-
-  // Try to load the index
   try {
     var response = await fetch(WIKI_BASE + 'index.md');
     if (response.ok) {
@@ -500,55 +415,372 @@ async function buildPageList() {
         for (var i = 0; i < links.length; i++) {
           var match = links[i].match(/\[([^\]]+)\]\(([^)]+)\)/);
           if (match && !match[2].startsWith('http')) {
-            pageList.push({
-              title: match[1],
-              path: match[2].replace('.md', '')
-            });
+            pageList.push({ title: match[1], path: match[2].replace('.md', '') });
           }
         }
       }
     }
-  } catch (e) {
-    // No index yet — navigation will be limited
+  } catch (e) {}
+}
+
+// ═══ TERMINAL ═══
+function handleTerminalKey(e) {
+  var input = document.getElementById('terminalInput');
+  
+  if (e.key === 'Enter') {
+    var cmd = input.value.trim();
+    if (cmd) {
+      terminalHistory.push(cmd);
+      historyIndex = terminalHistory.length;
+      executeCommand(cmd);
+    }
+    input.value = '';
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (historyIndex > 0) {
+      historyIndex--;
+      input.value = terminalHistory[historyIndex];
+    }
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (historyIndex < terminalHistory.length - 1) {
+      historyIndex++;
+      input.value = terminalHistory[historyIndex];
+    } else {
+      historyIndex = terminalHistory.length;
+      input.value = '';
+    }
   }
 }
 
-function updateNavigation(currentPage) {
-  var prevLink = document.getElementById('prevLink');
-  var nextLink = document.getElementById('nextLink');
+function terminalPrint(text, className) {
+  var output = document.getElementById('terminalOutput');
+  var line = document.createElement('div');
+  line.className = 'line ' + (className || '');
+  line.innerHTML = text;
+  output.appendChild(line);
+  output.scrollTop = output.scrollHeight;
+}
 
-  var currentIndex = -1;
-  for (var i = 0; i < pageList.length; i++) {
-    if (pageList[i].path === currentPage || pageList[i].title.toLowerCase() === currentPage) {
-      currentIndex = i;
+function terminalPrintCmd(cmd) {
+  terminalPrint('<span class="cmd">scriptorium&gt;</span> ' + cmd, 'cmd');
+}
+
+async function executeCommand(raw) {
+  terminalPrintCmd(raw);
+  
+  var parts = raw.split(/\s+/);
+  var cmd = parts[0].toLowerCase();
+  var args = parts.slice(1);
+  
+  switch (cmd) {
+    case 'help':
+      terminalPrint('✦ <span class="scribe-name">SCRIBES OF THE ORDER</span> ✦', 'result');
+      terminalPrint('');
+      terminalPrint('<span class="cmd">scribe copyist --all</span> — Transcribe all registered sources', '');
+      terminalPrint('<span class="cmd">scribe copyist &lt;source&gt;</span> — Transcribe a single source', '');
+      terminalPrint('<span class="cmd">scribe copyist --list</span> — List available sources', '');
+      terminalPrint('<span class="cmd">scribe indexer</span> — Rebuild the Catalogus', '');
+      terminalPrint('<span class="cmd">scribe chronologer</span> — Update the Chronicle', '');
+      terminalPrint('<span class="cmd">scribe glossator</span> — Cross-reference all folios', '');
+      terminalPrint('');
+      terminalPrint('<span class="cmd">folio &lt;name&gt;</span> — Open a folio in the lectern', '');
+      terminalPrint('<span class="cmd">folio index</span> — Return to the Catalogus', '');
+      terminalPrint('<span class="cmd">clear</span> — Clear the terminal', '');
+      terminalPrint('<span class="cmd">help</span> — This invocation', '');
       break;
+      
+    case 'clear':
+      document.getElementById('terminalOutput').innerHTML = '';
+      break;
+      
+    case 'folio':
+      if (args[0]) {
+        loadFolio(args[0]);
+        terminalPrint('Opened folio: <span class="result">' + args[0] + '</span>', 'result');
+      } else {
+        terminalPrint('Which folio? <span class="cmd">folio index</span> for the Catalogus.', 'warn');
+      }
+      break;
+      
+    case 'scribe':
+      if (args[0] === 'copyist') {
+        await runCopyist(args.slice(1));
+      } else if (args[0] === 'indexer') {
+        await runIndexer();
+      } else if (args[0] === 'chronologer') {
+        await runChronologer();
+      } else if (args[0] === 'glossator') {
+        terminalPrint('The Glossator is still being trained. Soon.', 'warn');
+      } else {
+        terminalPrint('Unknown scribe. Known: <span class="cmd">copyist, indexer, chronologer, glossator</span>', 'warn');
+      }
+      break;
+      
+    default:
+      terminalPrint('Unknown command. Type <span class="cmd">help</span>.', 'warn');
+  }
+}
+
+// ═══ SCRIBE: COPYIST ═══
+var SOURCES = [
+  { id: 'artemis', name: 'Artemis', repo: 'kairos-coder/artemis', branch: 'main', files: ['README.md', 'agent.js', 'cards/config.js'], namespace: 'pantheon' },
+  { id: 'gaia', name: 'GAIA', repo: 'kairos-coder/kairos-coder.github.io', branch: 'main', files: ['gaia/README.md'], namespace: 'pantheon' },
+  { id: 'demeter', name: 'Demeter', repo: 'kairos-coder/demeter', branch: 'main', files: ['README.md', 'demeter.html'], namespace: 'pantheon' },
+  { id: 'apollo', name: 'Apollo', repo: 'kairos-coder/apollo', branch: 'main', files: ['README.md', 'chat.html'], namespace: 'pantheon' },
+  { id: 'athena', name: 'Athena', repo: 'kairos-coder/athena', branch: 'main', files: ['README.md', 'chat.html'], namespace: 'pantheon' },
+  { id: 'ealdforn', name: 'Ealdforn Studios', repo: 'kairos-coder/kairos-coder.github.io', branch: 'main', files: ['ealdforn-studios/README.md'], namespace: 'root' }
+];
+
+var FEASTS = [
+  'the Feast of the Second Rise',
+  'the Vigil of the Unrisen Dough',
+  'the Feast of the Phase-Lock',
+  'the Day of the Silver Bow',
+  'the Feast of the Gilded Crust',
+  'the Vigil of the Still Night'
+];
+
+function getFeast() {
+  return FEASTS[Math.floor(Math.random() * FEASTS.length)];
+}
+
+async function runCopyist(args) {
+  if (args[0] === '--list') {
+    terminalPrint('Available sources:', 'result');
+    for (var i = 0; i < SOURCES.length; i++) {
+      terminalPrint('  <span class="cmd">' + SOURCES[i].id + '</span> — ' + SOURCES[i].name + ' (' + SOURCES[i].repo + ')', '');
+    }
+    return;
+  }
+
+  var targets = [];
+  if (args[0] === '--all' || args.length === 0) {
+    targets = SOURCES;
+  } else {
+    for (var i = 0; i < args.length; i++) {
+      var found = SOURCES.find(function(s) { return s.id === args[i]; });
+      if (found) targets.push(found);
+      else terminalPrint('Unknown source: <span class="warn">' + args[i] + '</span>', 'warn');
     }
   }
 
-  if (currentIndex > 0) {
-    prevLink.style.visibility = 'visible';
-    prevLink.textContent = '← ' + pageList[currentIndex - 1].title;
-    prevLink.onclick = function() {
-      loadPage(pageList[currentIndex - 1].path);
-      return false;
-    };
-  } else {
-    prevLink.style.visibility = 'hidden';
+  if (targets.length === 0) {
+    terminalPrint('No sources to transcribe. <span class="cmd">scribe copyist --list</span>', 'warn');
+    return;
   }
 
-  if (currentIndex < pageList.length - 1 && currentIndex >= 0) {
-    nextLink.style.visibility = 'visible';
-    nextLink.textContent = pageList[currentIndex + 1].title + ' →';
-    nextLink.onclick = function() {
-      loadPage(pageList[currentIndex + 1].path);
-      return false;
-    };
-  } else {
-    nextLink.style.visibility = 'hidden';
+  var feast = getFeast();
+  terminalPrint('✦ <span class="scribe-name">Copyist</span> begins transcribing on ' + feast + '...', 'result');
+
+  var transcribed = [];
+
+  for (var t = 0; t < targets.length; t++) {
+    var source = targets[t];
+    terminalPrint('  Consulting: <span class="cmd">' + source.repo + '</span>', '');
+    
+    for (var f = 0; f < source.files.length; f++) {
+      var filePath = source.files[f];
+      var url = 'https://raw.githubusercontent.com/' + source.repo + '/' + source.branch + '/' + filePath;
+      
+      try {
+        var response = await fetch(url);
+        if (!response.ok) {
+          terminalPrint('    ✗ <span class="warn">' + filePath + '</span> — not found (404)', 'warn');
+          continue;
+        }
+        
+        var content = await response.text();
+        var pageTitle = source.name;
+        if (source.files.length > 1 && filePath !== 'README.md') {
+          pageTitle = source.name + ' — ' + filePath.replace('.md', '').replace('.js', '');
+        }
+        
+        // Wrap code files
+        if (filePath.endsWith('.js')) {
+          content = '# ' + pageTitle + '\n\n`' + filePath + '`\n\n```javascript\n' + content + '\n```';
+        } else if (filePath.endsWith('.html')) {
+          content = '# ' + pageTitle + '\n\n`' + filePath + '`\n\n```html\n' + content + '\n```';
+        }
+        
+        var filename = pageTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        var fullPath = (source.namespace === 'root' ? '' : source.namespace + '/') + filename + '.md';
+        
+        var frontmatter = [
+          '---',
+          'title: ' + pageTitle,
+          'description: Transcribed from ' + source.repo + '/' + filePath + ' by Copyist',
+          'namespace: ' + source.namespace,
+          'scribe: Copyist',
+          'feast: ' + feast,
+          'source: ' + source.repo + '/' + filePath,
+          '---',
+          '',
+          ''
+        ].join('\n');
+        
+        var colophon = '\n\n---\n*Transcribed by the Copyist on ' + feast + '. Source: ' + source.repo + '/' + filePath + '.*';
+        
+        transcribed.push({
+          path: fullPath,
+          content: frontmatter + content + colophon,
+          title: pageTitle
+        });
+        
+        terminalPrint('    ✓ <span class="result">' + fullPath + '</span>', 'result');
+        
+      } catch (err) {
+        terminalPrint('    ✗ <span class="error">' + filePath + '</span> — ' + err.message, 'error');
+      }
+    }
+  }
+
+  terminalPrint('');
+  terminalPrint('✦ Copyist complete. <span class="result">' + transcribed.length + ' folios</span> transcribed.', 'result');
+  
+  // Offer to display the generated markdown
+  if (transcribed.length > 0) {
+    terminalPrint('');
+    terminalPrint('Folios ready for the archive. <span class="cmd">display &lt;number&gt;</span> to review.', '');
+    terminalPrint('Or open one now: <span class="cmd">folio ' + transcribed[0].path.replace('.md', '') + '</span>', '');
+    
+    // Store for display command
+    window._lastTranscribed = transcribed;
   }
 }
 
-// ═══ STARTUP ═══
+// ═══ SCRIBE: INDEXER ═══
+async function runIndexer() {
+  var feast = getFeast();
+  terminalPrint('✦ <span class="scribe-name">Indexer</span> compiling the Catalogus...', 'result');
+
+  // Try to discover all .md files from known namespaces
+  var namespaces = {};
+  var totalPages = 0;
+
+  // Scan known files by trying to fetch them
+  var knownFiles = ['index.md', 'chronicle.md'];
+  
+  // Add files from SOURCES
+  for (var i = 0; i < SOURCES.length; i++) {
+    var source = SOURCES[i];
+    for (var f = 0; f < source.files.length; f++) {
+      var pageTitle = source.name;
+      if (source.files.length > 1 && source.files[f] !== 'README.md') {
+        pageTitle = source.name + ' — ' + source.files[f].replace('.md', '').replace('.js', '');
+      }
+      var filename = pageTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      var fullPath = (source.namespace === 'root' ? '' : source.namespace + '/') + filename + '.md';
+      knownFiles.push(fullPath);
+    }
+  }
+
+  // Try to fetch each and check if it exists
+  for (var k = 0; k < knownFiles.length; k++) {
+    var fpath = knownFiles[k];
+    if (fpath === 'index.md') continue;
+    
+    try {
+      var response = await fetch(WIKI_BASE + fpath);
+      if (response.ok) {
+        var content = await response.text();
+        var parsed = parseFrontmatter(content);
+        var ns = parsed.namespace || 'root';
+        if (!namespaces[ns]) namespaces[ns] = [];
+        namespaces[ns].push({
+          title: parsed.title || fpath.replace('.md', ''),
+          description: parsed.description || '',
+          path: fpath.replace('.md', ''),
+          feast: parsed.feast || ''
+        });
+        totalPages++;
+      }
+    } catch (e) {}
+  }
+
+  // Build index.md content
+  var index = '# CATALOGUS\n\n';
+  index += '*The Master Index of the Order of Olympus Archive*\n\n';
+
+  var nsNames = Object.keys(namespaces).sort();
+  for (var n = 0; n < nsNames.length; n++) {
+    var ns = nsNames[n];
+    var displayName = ns === 'root' ? 'Archive' : ns.charAt(0).toUpperCase() + ns.slice(1);
+    index += '## ' + displayName + '\n\n';
+    var pages = namespaces[ns];
+    for (var p = 0; p < pages.length; p++) {
+      index += '- [' + pages[p].title + '](' + pages[p].path + ')';
+      if (pages[p].description) index += ' — ' + pages[p].description;
+      if (pages[p].feast) index += ' *(copied on ' + pages[p].feast + ')*';
+      index += '\n';
+    }
+    index += '\n';
+  }
+
+  index += '\n---\n*Indexed by the Indexer on ' + feast + '.*';
+
+  terminalPrint('  Catalogus compiled — <span class="result">' + totalPages + ' pages</span> indexed.', 'result');
+  terminalPrint('');
+  terminalPrint('✧ CATALOGUS PREVIEW ✧', 'result');
+  
+  // Display preview in terminal
+  var lines = index.split('\n');
+  for (var l = 0; l < Math.min(lines.length, 30); l++) {
+    if (lines[l].trim()) {
+      terminalPrint(lines[l], '');
+    }
+  }
+  if (lines.length > 30) {
+    terminalPrint('... (open <span class="cmd">folio index</span> to read full Catalogus)', '');
+  }
+
+  // Store for potential commit
+  window._lastIndexed = { path: 'index.md', content: index };
+}
+
+// ═══ SCRIBE: CHRONOLOGER ═══
+var TIMELINE = [
+  { date: '310 CE', event: 'Sister Tempura establishes the Gilded Crust', category: 'monastery' },
+  { date: '345 CE', event: 'Death of Sister Tempura. Feast of the Second Rise established.', category: 'monastery' },
+  { date: '2019', event: 'GPT-2. First monastic AI experiments. Sister Tempura period.', category: 'origins' },
+  { date: '2024', event: 'Sister_DS 1st generation. Order of Olympus founded.', category: 'monastery' },
+  { date: '2026-05-18', event: 'GAIA Primordial Cosmology Engine deployed at kairos-coder.github.io/gaia', category: 'pantheon' },
+  { date: '2026-05-21', event: 'Apollo and Athena go LIVE — Pollinations text + image, GaiaDB memory', category: 'pantheon' },
+  { date: '2026-05-22', event: 'Artemis card engine v2.3 — 9 cards, heuristic classifier', category: 'pantheon' },
+  { date: '2026-05-24', event: 'Artemis v3.0 Huntress Engine. Pure card-based chat inference loop.', category: 'pantheon' },
+  { date: '2026-05-24', event: 'Scriptorium established. The word-keepers begin their work.', category: 'archive' }
+];
+
+async function runChronologer() {
+  var feast = getFeast();
+  terminalPrint('✦ <span class="scribe-name">Chronologer</span> updating the Chronicle...', 'result');
+
+  TIMELINE.sort(function(a, b) { return a.date.localeCompare(b.date); });
+
+  var page = '# THE CHRONICLE\n\n';
+  page += '*The Sacred Timeline of the Order of Olympus*\n\n';
+  page += '| Date | Event | Category |\n';
+  page += '|------|-------|----------|\n';
+
+  for (var i = 0; i < TIMELINE.length; i++) {
+    page += '| ' + TIMELINE[i].date + ' | ' + TIMELINE[i].event + ' | ' + TIMELINE[i].category + ' |\n';
+  }
+
+  page += '\n---\n*Maintained by the Chronologer. Last updated on ' + feast + '.*';
+
+  terminalPrint('  Chronicle updated — <span class="result">' + TIMELINE.length + ' entries</span>.', 'result');
+  terminalPrint('');
+  terminalPrint('✧ CHRONICLE PREVIEW ✧', 'result');
+
+  var lines = page.split('\n');
+  for (var l = 0; l < Math.min(lines.length, 20); l++) {
+    if (lines[l].trim()) terminalPrint(lines[l], '');
+  }
+
+  window._lastChronologer = { path: 'chronicle.md', content: page };
+}
+
+// ═══ START ═══
 init();
 </script>
 </body>
